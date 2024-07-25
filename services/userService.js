@@ -1,15 +1,10 @@
 
 const { readFile, writeFile,decryptData } = require('./commonService')
-const userModel = require("../models/userModel")
 const bcrypt = require('bcrypt')
-const fs = require('fs').promises;
 const path = require('path');
 const jwt = require('jsonwebtoken')
 
-const filePath = path.join(__dirname, '../data/usersData.json');
 const userservice = {
-
-
 
     registerNewUser: async (user) => {
         const hasPassword = await bcrypt.hash(user.password, 10)

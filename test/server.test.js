@@ -15,6 +15,7 @@ let token = '';
 // Auth tests
 
 tap.test('POST /users/signup', async (t) => { 
+    console.log("🚀 ~ tap.test ~ t:", t)
     const response = await server.post('/users/signup').send(mockUser);
     t.equal(response.status, 200);
     t.end();
