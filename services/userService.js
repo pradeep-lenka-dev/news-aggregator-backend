@@ -1,8 +1,8 @@
 
 const { readFile, writeFile,decryptData } = require('./commonService')
 const bcrypt = require('bcrypt')
-const path = require('path');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+require('dotenv').config(); 
 
 const userservice = {
 
@@ -24,7 +24,6 @@ const userservice = {
     },
 
     loginUser: async (user) => {
-
         const usersData = await readFile();
         const existingUser = usersData.find((u) => u.email === user.email);
 
@@ -37,9 +36,14 @@ const userservice = {
             return { status: "failed", message: 'Invalid password' };
         }
 
-        const token = jwt.sign({ email: user.email }, 'secretKey', { expiresIn: '1h' });
+        const token = jwt.sign({ email: user.email }, process.env.SECRET_KEY, { expiresIn: '1h' });
 
         return { status: 'success', message: 'User logged in successfully', token };
+    },
+    getPreferences: async (user) => {
+        const usersData = await readFile();
+        const logedinUser = usersData.find((users)=> users.email == user.email)
+        return ({status:"success",data: logedinUser.preferences})
     }
 
 }

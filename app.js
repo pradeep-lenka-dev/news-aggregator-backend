@@ -4,7 +4,7 @@ const app = express();
 const port = 3000;
 
 app.use(express.json());
-app.use('/users',userrouter)
+app.use('/',userrouter)
 app.use(express.urlencoded({ extended: true }));
 
 app.use((err, req, res, next) => {

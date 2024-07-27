@@ -15,10 +15,12 @@ let token = '';
 // Auth tests
 
 tap.test('POST /users/signup', async (t) => { 
-    console.log("🚀 ~ tap.test ~ t:", t)
     const response = await server.post('/users/signup').send(mockUser);
+    console.log("🚀 ~ tap.test ~ response:", response.status)
     t.equal(response.status, 200);
-    t.end();
+    t.end((err,data)=>{
+        console.log("errrrrrr---->",err)
+    });
 });
 
 tap.test('POST /users/signup with missing email', async (t) => {

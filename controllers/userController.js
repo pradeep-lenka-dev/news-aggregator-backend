@@ -22,6 +22,17 @@ const userController = {
             res.json("user logedin failed",error)
         }
 
+    },
+    getPreferences: async (req,res)=>{
+        const user = req.user
+        console.log("🚀 ~ getPreferences: ~ Authorization:", user)
+        try {
+            const result = await userservice.getPreferences(user)
+            return res.json(result)
+            
+        } catch (error) {
+            
+        }
     }
 
 
