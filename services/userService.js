@@ -44,6 +44,22 @@ const userservice = {
         const usersData = await readFile();
         const logedinUser = usersData.find((users)=> users.email == user.email)
         return ({status:"success",data: logedinUser.preferences})
+    },
+    updatePrefrence: async (user,preferences) => { 
+        usersData = await readFile();
+        const logedinUser = usersData.find((users)=> users.email == user.email)
+        try {
+            
+            logedinUser.preferences = [...new Set([...logedinUser.preferences, ...preferences.preferences])]; 
+            await writeFile(usersData)
+
+        } catch (error) {
+            
+        }
+
+        return "return function from service"
+
+
     }
 
 }

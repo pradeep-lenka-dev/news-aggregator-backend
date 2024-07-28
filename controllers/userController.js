@@ -25,12 +25,26 @@ const userController = {
     },
     getPreferences: async (req,res)=>{
         const user = req.user
-        console.log("🚀 ~ getPreferences: ~ Authorization:", user)
         try {
             const result = await userservice.getPreferences(user)
             return res.json(result)
             
         } catch (error) {
+            res.json("get prefrences failed",error)
+
+        }
+    },
+    updatePrefrence : async (req,res)=>{
+        const preferences = req.body
+        console.log("🚀 ~ updatePrefrence: ~ preferences:", preferences.preferences)
+        const userEmail = req.user
+        try {
+            const result = await userservice.updatePrefrence(userEmail,preferences)
+            return res.json(result)
+            
+        } catch (error) {
+            console.log("🚀 ~ updatePrefrence: ~ error:", error)
+            res.json("update prefrence failed", error)
             
         }
     }
