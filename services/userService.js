@@ -1,5 +1,5 @@
 
-const { readFile, writeFile,decryptData } = require('./commonService')
+const commonservice = require('./commonService')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
 require('dotenv').config(); 
@@ -8,7 +8,7 @@ const userservice = {
 
     registerNewUser: async (user) => {
         const hasPassword = await bcrypt.hash(user.password, 10)
-        const result = await readFile()
+        const result = await commonservice.readFile()
         if (result.find((users) => users.email === user.email)) {
             console.log("user alredy exist")
             return ("user alredy exist")
@@ -16,7 +16,7 @@ const userservice = {
 
             user.password = hasPassword
             result.push(user)
-            await writeFile(result)
+            await commonservice.writeFile(result)
             return (user) ;
         }
 
@@ -24,7 +24,7 @@ const userservice = {
     },
 
     loginUser: async (user) => {
-        const usersData = await readFile();
+        const usersData = await commonservice.readFile();
         const existingUser = usersData.find((u) => u.email === user.email);
 
         if (!existingUser) {
@@ -40,18 +40,20 @@ const userservice = {
 
         return { status: 'success', message: 'User logged in successfully', token };
     },
+
     getPreferences: async (user) => {
-        const usersData = await readFile();
+        const usersData = await commonservice.readFile();
         const logedinUser = usersData.find((users)=> users.email == user.email)
         return ({status:"success",data: logedinUser.preferences})
     },
+    
     updatePrefrence: async (user,preferences) => { 
-        usersData = await readFile();
+        usersData = await commonservice.readFile();
         const logedinUser = usersData.find((users)=> users.email == user.email)
         try {
             
             logedinUser.preferences = [...new Set([...logedinUser.preferences, ...preferences.preferences])]; 
-            await writeFile(usersData)
+            await commonservice.writeFile(usersData)
 
         } catch (error) {
             

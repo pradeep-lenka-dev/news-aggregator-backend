@@ -5,8 +5,7 @@
     "password": "$2b$10$M7zAeDsOoDqHtT5B0WVcL.6HLGPCZO2v/rZdSef8PPF0LIP/NUdt.",
     "preferences": [
       "sports",
-      "global",
-      "commics"
+      "technology"
     ]
   },
   {
@@ -14,7 +13,7 @@
     "email": "pradeeplenka6@gmail.com",
     "password": "$2b$10$GuJ68XkDuwGNjECdM6yYz.xcOdTPMuO/5E891PksFxI3p8ooA/ADK",
     "preferences": [
-      "sportmms"
+      "sports"
     ]
   }
 ]
