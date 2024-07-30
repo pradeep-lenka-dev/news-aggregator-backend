@@ -8,6 +8,7 @@ const validateFields =  (reuiredfield) =>{
                 errors.push(`${field} is required`);
             }else if (field === 'password' && !passwordRegex.test(value)) {
                 errors.push('Password must be at least 8 characters long and contain at least one uppercase letter, one number, and one special character');
+               // return res.status(401).json({ errors });
             }
             
         });

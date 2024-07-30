@@ -44,6 +44,9 @@ const userservice = {
     getPreferences: async (user) => {
         const usersData = await commonservice.readFile();
         const logedinUser = usersData.find((users)=> users.email == user.email)
+        if (!logedinUser) {
+            return { status: 'error', message: 'User not found' };
+        }
         return ({status:"success",data: logedinUser.preferences})
     },
     

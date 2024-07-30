@@ -27,7 +27,11 @@ const userController = {
         const user = req.user
         try {
             const result = await userservice.getPreferences(user)
-            return res.json(result)
+            console.log("🚀 ~ getPreferences: ~ result:", result)
+            if(result.status == 'error'){
+                res.status(404).json(result.message)
+            }
+             res.status(200).json(result.data)
             
         } catch (error) {
             res.json("get prefrences failed",error)
